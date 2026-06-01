@@ -114,7 +114,7 @@ function buscarCards(termoForcado = null) {
             pageTitle.innerText = "Mensagens Padrões";
             pageDesc.innerText = "Clique no botão para copiar o template com a formatação correta para o chamado.";
         } else if (categoriaAtual === 'templates') {
-            pageTitle.innerText = "Templates de Abertura";
+            pageTitle.innerText = "Templates Padrões";
             pageDesc.innerText = "Estruturas prontas para abertura de incidentes e envio para outras equipes.";
         } else if (categoriaAtual === 'links') {
             pageTitle.innerText = "Central de Ajuda";
