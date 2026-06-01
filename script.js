@@ -90,10 +90,10 @@ function filtrarCategoria(categoria, elementoClicado) {
         pageTitle.innerText = "Central de Ajuda";
         pageDesc.innerText = "Links úteis e documentações para dúvidas recorrentes dos clientes.";
     } else if (categoria === 'scripts') {
-        pageTitle.innerText = "Scripts Úteis";
+        pageTitle.innerText = "Scripts";
         pageDesc.innerText = "Chaves de importação de scripts para correções de dados e rotinas.";
     } else if (categoria === 'relatorios') {
-        pageTitle.innerText = "Relatórios Úteis";
+        pageTitle.innerText = "Relatórios";
         pageDesc.innerText = "Chaves de importação de relatórios customizados.";
     }
 
