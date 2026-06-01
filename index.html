@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Betha Wiki</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="sidebar-top">
+            <div class="sidebar-header">
+                <h2 class="brand-logo">Betha Wiki</h2>
+                <button id="theme-toggle" class="btn-theme" title="Alternar tema">
+                    <span class="icon">🌓</span>
+                </button>
+            </div>
+            
+            <ul class="nav-list">
+                <li><a href="#" class="nav-link active" onclick="filtrarCategoria('mensagens', this)">Mensagens Padrões</a></li>
+                <li><a href="#" class="nav-link" onclick="filtrarCategoria('templates', this)">Templates Padrões</a></li>
+                <li><a href="#" class="nav-link" onclick="filtrarCategoria('links', this)">Central de Ajuda</a></li>
+                <li><a href="#" class="nav-link" onclick="filtrarCategoria('scripts', this)">Scripts</a></li>
+                <li><a href="#" class="nav-link" onclick="filtrarCategoria('relatorios', this)">Relatórios</a></li>
+            </ul>
+
+            <div class="beethoven-card">
+                <div class="beethoven-header">
+                    <div class="ai-icon">✨</div>
+                    <span class="beethoven-tag">Assistente de Suporte</span>
+                </div>
+                <h3>Beethoven</h3>
+                <p>Gere scripts Groovy e relatórios personalizados com o Beethoven.</p>
+                <a href="https://gemini.google.com/gem/bd1345b90616" target="_blank" rel="noopener noreferrer" class="btn-beethoven">
+                    Falar com Beethoven
+                </a>
+            </div>
+        </div>
+        
+        <div class="sidebar-footer">
+            <p class="section-title">Betha Sistemas</p>
+            <p class="credits">Desenvolvido por Endriel Kuschel</p>
+        </div>
+    </nav>
+
+    <main class="content">
+        <header class="main-header">
+            <h1 id="page-title">Mensagens Padrões</h1>
+            <p id="page-desc">Clique no botão para copiar o template com a formatação correta para o chamado.</p>
+            
+            <div class="search-container">
+                <input type="text" id="search-input" class="search-bar" placeholder="Pesquisar cards..." onkeyup="buscarCards()">
+            </div>
+        </header>
+        
+        <div class="cards-grid">
+            
+            <div class="card" data-category="mensagens">
+                <div class="card-badge">Mensagem</div>
+                <h3>Confirmação de Recebimento</h3>
+                <p id="msg-recebimento">Olá, @solicitante.<br><br>Seu chamado foi recebido, assim que possível analisaremos a sua necessidade e voltamos a fazer contato.<br><br>Até logo!<br><br>Atenciosamente,<br>{panel:title=[SEU NOME]}<br>Betha Sistemas<br>{panel}</p>
+                <button class="btn-copy" onclick="copiarTexto('msg-recebimento', this)">Copiar</button>
+            </div>
+
+            <div class="card" data-category="mensagens">
+                <div class="card-badge">Mensagem</div>
+                <h3>Encerramento de Chamado</h3>
+                <p id="msg-encerramento">Olá, @solicitante.<br><br>Para atender a sua necessidade é necessário realizar [detalhar a solução].<br><br>Com as orientações repassadas, estou finalizando o seu atendimento.<br><br>Se precisar de um novo auxílio, estamos à sua disposição!<br><br>Seu feedback é muito importante para nós!<br>Participe da nossa Pesquisa de Satisfação.<br><br>Atenciosamente,<br>{panel:title=[SEU NOME]}<br>Betha Sistemas<br>{panel}</p>
+                <button class="btn-copy" onclick="copiarTexto('msg-encerramento', this)">Copiar</button>
+            </div>
+
+            <div class="card" data-category="mensagens">
+                <div class="card-badge">Mensagem</div>
+                <h3>Encerramento (Telefone)</h3>
+                <p id="msg-telefone">Olá, @solicitante.<br><br>Conforme contato telefônico [informar a solução repassada ao cliente], considerando que atendeu a sua necessidade, estou finalizando o seu atendimento.<br><br>Se precisar de um novo auxílio, estamos à sua disposição!<br><br>Seu feedback é muito importante para nós!<br>Participe da nossa Pesquisa de Satisfação.<br><br>Atenciosamente,<br>{panel:title=[SEU NOME]}<br>Betha Sistemas<br>{panel}</p>
+                <button class="btn-copy" onclick="copiarTexto('msg-telefone', this)">Copiar</button>
+            </div>
+
+            <div class="card" data-category="mensagens">
+                <div class="card-badge">Mensagem</div>
+                <h3>Questionamento de Chamado</h3>
+                <p id="msg-questionamento">Olá, @solicitante.<br><br>Preciso confirmar algumas informações com você, para dar continuidade no atendimento do seu chamado.<br><br>[Incluir os itens que precisam ser alinhados/questionados]<br><br>Fico no seu aguardo.<br><br>Até logo!<br><br>Atenciosamente,<br>{panel:title=[SEU NOME]}<br>Betha Sistemas<br>{panel}</p>
+                <button class="btn-copy" onclick="copiarTexto('msg-questionamento', this)">Copiar</button>
+            </div>
+
+            <div class="card" data-category="mensagens">
+                <div class="card-badge">Mensagem</div>
+                <h3>Cobrança de Pendência</h3>
+                <p id="msg-cobranca">Olá, @solicitante.<br><br>Gostaríamos de lembrar que estamos aguardando o seu retorno com as informações solicitadas anteriormente para darmos continuidade ao atendimento.<br><br>Caso o problema já tenha sido resolvido, por favor, nos avise para que possamos encerrar o chamado.<br><br>Fico no aguardo!<br><br>Atenciosamente,<br>{panel:title=[SEU NOME]}<br>Betha Sistemas<br>{panel}</p>
+                <button class="btn-copy" onclick="copiarTexto('msg-cobranca', this)">Copiar</button>
+            </div>
+
+            <div class="card" data-category="mensagens">
+                <div class="card-badge">Mensagem</div>
+                <h3>Questionamento (Alta Demanda)</h3>
+                <p id="msg-alta-demanda">Olá, @solicitante.<br><br>Agradecemos por entrar em contato conosco. Devido à alta demanda, nosso tempo de resposta pode estar um pouco maior do que o habitual, e pedimos desculpas por qualquer inconveniente.<br><br>Para que possamos atendê-lo da melhor forma, precisamos de algumas informações adicionais.<br>[Incluir os itens que precisam ser alinhados/questionados]<br><br>Fico no seu aguardo.<br><br>Até logo!<br><br>Atenciosamente,<br>{panel:title=[SEU NOME]}<br>Betha Sistemas<br>{panel}</p>
+                <button class="btn-copy" onclick="copiarTexto('msg-alta-demanda', this)">Copiar</button>
+            </div>
+
+            <div class="card" data-category="mensagens">
+                <div class="card-badge">Mensagem</div>
+                <h3>Aguardando Aprovação (7 dias)</h3>
+                <p id="msg-aprovacao">Com as orientações repassadas, estou aguardando a sua aprovação. Caso não haja um retorno em até 7 dias, o chamado será finalizado.<br><br>Se precisar de um novo auxílio, estamos à sua disposição!<br><br>Seu feedback é muito importante para nós!<br>Participe da nossa Pesquisa de Satisfação.<br><br>Atenciosamente,<br>{panel:title=[SEU NOME]}<br>Betha Sistemas<br>{panel}</p>
+                <button class="btn-copy" onclick="copiarTexto('msg-aprovacao', this)">Copiar</button>
+            </div>
+
+            <div class="card" data-category="mensagens">
+                <div class="card-badge">Mensagem</div>
+                <h3>Questionamento sobre Prazos</h3>
+                <p id="msg-prazos">Olá, @solicitante.<br><br>Seu chamado já está sendo verificado pela equipe responsável. Estou solicitando urgência ao atendimento. Assim que for concluído, você será informado por meio de uma notificação neste chamado.<br><br>Até logo!<br><br>Atenciosamente,<br>{panel:title=[SEU NOME]}<br>Betha Sistemas<br>{panel}</p>
+                <button class="btn-copy" onclick="copiarTexto('msg-prazos', this)">Copiar</button>
+            </div>
+
+            <div class="card" data-category="mensagens">
+                <div class="card-badge">Mensagem</div>
+                <h3>Encerramento (Falta de Resposta)</h3>
+                <p id="msg-sem-info">Olá, @solicitante.<br><br>Estamos concluindo esta solicitação devido à falta de resposta.<br><br>Informamos que quaisquer pendências deste atendimento podem ser tratadas em uma nova solicitação. Para tanto, basta cadastrar um novo chamado e informar o número deste.<br><br>Se precisar de um novo auxílio, estamos à sua disposição!<br><br>Atenciosamente,<br>{panel:title=[SEU NOME]}<br>Betha Sistemas<br>{panel}</p>
+                <button class="btn-copy" onclick="copiarTexto('msg-sem-info', this)">Copiar</button>
+            </div>
+
+            <div class="card" data-category="mensagens">
+                <div class="card-badge">Mensagem</div>
+                <h3>Envio para Serviços</h3>
+                <p id="msg-servicos">Olá, @solicitante.<br><br>Conforme conversamos, a necessidade apresentada é de [descrever necessidade do cliente].<br><br>Para realizá-la você tem as seguintes alternativas disponíveis no sistema:<br><br>1 - <br>2 - <br><br>Porém [você deseja / é necessário] uma customização específica e/ou acompanhamento técnico, e com isso estou direcionando o chamado para que possamos atuar nessa necessidade. Assim que possível retornaremos o contato.<br><br>Atenciosamente,<br>{panel:title=[SEU NOME]}<br>Betha Sistemas<br>{panel}</p>
+                <button class="btn-copy" onclick="copiarTexto('msg-servicos', this)">Copiar</button>
+            </div>
+
+            <div class="card" data-category="mensagens">
+                <div class="card-badge">Mensagem</div>
+                <h3>Envio de Melhoria</h3>
+                <p id="msg-melhoria">Olá, @solicitante.<br><br>Estou encaminhando sua sugestão de Melhoria para análise. Assim que possível, voltamos a entrar em contato com você.<br><br>Atenciosamente,<br>{panel:title=[SEU NOME]}<br>Betha Sistemas<br>{panel}</p>
+                <button class="btn-copy" onclick="copiarTexto('msg-melhoria', this)">Copiar</button>
+            </div>
+
+            <div class="card" data-category="mensagens">
+                <div class="card-badge">Mensagem</div>
+                <h3>Envio de Incidente</h3>
+                <p id="msg-incidente">Olá, @solicitante.<br><br>Estou encaminhando seu chamado para que possamos atuar na necessidade apresentada neste atendimento. Assim que a atuação for concluída, você será informado por meio de uma notificação neste chamado.<br><br>Até logo!<br><br>Atenciosamente,<br>{panel:title=[SEU NOME]}<br>Betha Sistemas<br>{panel}</p>
+                <button class="btn-copy" onclick="copiarTexto('msg-incidente', this)">Copiar</button>
+            </div>
+
+            <div class="card" data-category="mensagens">
+                <div class="card-badge">Mensagem</div>
+                <h3>Instabilidade Geral</h3>
+                <p id="msg-instabilidade">Olá, @solicitante.<br><br>Informamos que no momento estamos passando por uma instabilidade sistêmica que afeta [informar o módulo/rotina]. Nossa equipe técnica já está ciente e atuando com prioridade máxima para normalizar o acesso o mais breve possível.<br><br>Assim que tivermos novidades, atualizaremos este chamado.<br><br>Agradecemos a compreensão.<br><br>Atenciosamente,<br>{panel:title=[SEU NOME]}<br>Betha Sistemas<br>{panel}</p>
+                <button class="btn-copy" onclick="copiarTexto('msg-instabilidade', this)">Copiar</button>
+            </div>
+
+            <div class="card" data-category="mensagens">
+                <div class="card-badge">Mensagem</div>
+                <h3>Encerramento (LGPD)</h3>
+                <p id="msg-lgpd">Para atender a sua necessidade é necessário realizar [detalhar a solução].<br><br>Por fim, gostaríamos de lembrá-lo(a) de que a Betha está atenta às disposições trazidas pela - LGPD.<br>Os dados pessoais e/ou sensíveis compartilhados conosco, em razão deste atendimento, serão tratados de acordo com o consentimento obtido ou com outra base legal prevista na LGPD.<br>Para esclarecer quaisquer dúvidas sobre este assunto, convidamos você a acessar a nossa Política de Privacidade e Proteção de Dados, disponível em https://www.betha.com.br/politica-de-protecao-de-dados<br><br>Se precisar de um novo auxílio, estamos à sua disposição!<br><br>Atenciosamente,<br>{panel:title=[SEU NOME]}<br>Betha Sistemas<br>{panel}</p>
+                <button class="btn-copy" onclick="copiarTexto('msg-lgpd', this)">Copiar</button>
+            </div>
+
+            <div class="card" data-category="templates" style="display: none;">
+                <div class="card-badge badge-template">Template</div>
+                <h3>Incidentes Desenvolvimento</h3>
+                <p id="temp-desenv">*1 - Descrição*<br>Descrever brevemente a inconsistência relatada pelo cliente.<br><br>*2 - Cliente*<br>- Entidade:<br>- Database:<br>- Entity:<br><br>*3 - Funcionalidade*<br>Funcionalidade X<br><br>*4 - Acesso na entidade Cloud*<br>Habilitar o parâmetro “Acesso técnico”.<br><br>*5 - Passos para simulação*<br>- Acessar a tela X;<br>- Campo X: Teste;<br><br>*6 - Necessidade*<br>O que necessita ser ajustado.</p>
+                <button class="btn-copy" onclick="copiarTexto('temp-desenv', this)">Copiar</button>
+            </div>
+            
+            <div class="card" data-category="templates" style="display: none;">
+                <div class="card-badge badge-template">Template</div>
+                <h3>Melhoria</h3>
+                <p id="temp-melhoria">*1 - Funcionalidade*<br>Descrever a funcionalidade que será melhorada.<br><br>*2 - Necessidade*<br>Descrever como é executado o processo envolvido na sugestão e as mudanças que deverão ser feitas.<br><br>*3 - Indicação de forma paliativa para resolução*<br>Descrever a sugestão paliativa dada ao cliente<br><br>*4 - Sugestão de formato para implementação*<br>Descrever o formato de como seria realizada a implenetação<br><br>*5 - Informações Legais*<br>Se atualizar legislação, informar: legislação, data de publicação e limite.</p>
+                <button class="btn-copy" onclick="copiarTexto('temp-melhoria', this)">Copiar</button>
+            </div>
+
+            <div class="card" data-category="templates" style="display: none;">
+                <div class="card-badge badge-template">Template</div>
+                <h3>Tratamento de Dados</h3>
+                <p id="temp-dados">*1 - Cliente*<br>- Entidade:<br>- Database:<br>- Entity:<br><br>*2 - Necessidade*<br>Descrever a necessidade do tratamento dos dados.<br><br>*3 - Dados a serem alterados*<br>Descrever os dados a serem alterados e como será o tratamento.<br></p>
+                <button class="btn-copy" onclick="copiarTexto('temp-dados', this)">Copiar</button>
+            </div>
+
+            <div class="card" data-category="templates" style="display: none;">
+                <div class="card-badge badge-template">Template</div>
+                <h3>Relato de Lentidão</h3>
+                <p id="temp-lentidao">*1 - Cliente*<br>- Entidade:<br>- Database:<br>- Entity:<br><br>*2 - Tela/Rotina específica*<br>Informar se afeta todo o sistema ou apenas uma rotina.<br><br>*3 - Horário e Recorrência*<br>A partir de que horas iniciou? É constante ou intermitente?<br><br>*4 - Ações realizadas*<br>Teste de rede local, limpeza de cache, mudança de navegador.</p>
+                <button class="btn-copy" onclick="copiarTexto('temp-lentidao', this)">Copiar</button>
+            </div>
+
+            <div class="card" data-category="links" style="display: none;">
+                <div class="card-badge badge-link">Artigo</div>
+                <h3>Integração Folha x Contábil</h3>
+                <p>Documentação detalhada sobre como funciona a interação e integração de dados processados entre os sistemas Folha e Contábil.</p>
+                <a href="https://contabil.ajuda.betha.cloud/contabil-cloud/ajuda/Executando/#intera%C3%A7%C3%A3o-com-o-folha" target="_blank" rel="noopener noreferrer" class="btn-copy btn-link">
+                    Acessar Artigo ↗
+                </a>
+            </div>
+
+            <div class="card" data-category="links" style="display: none;">
+                <div class="card-badge badge-link">Artigo</div>
+                <h3>13º Integral antes de Dezembro</h3>
+                <p>Detalhes sobre o ajuste no cálculo do eSocial para as matrículas que receberam o 13º salário integral antes do mês de dezembro de 2022.</p>
+                <a href="https://pessoal.ajuda.betha.cloud/folha-cloud/novidades/2022/dezembro/#esocial---ajustado-o-c%C3%A1lculo-do-13%C2%BA-sal%C3%A1rio-integral-das-matr%C3%ADculas-que-receberam-o-13%C2%BA-integral-antes-de-dezembro-de-2022" target="_blank" rel="noopener noreferrer" class="btn-copy btn-link">
+                    Acessar Artigo ↗
+                </a>
+            </div>
+
+            <div class="card" data-category="links" style="display: none;">
+                <div class="card-badge badge-link">Artigo</div>
+                <h3>Cancelamento Integral de Férias</h3>
+                <p>Instruções e novidades sobre as melhorias no processo de cancelamento integral do período de gozo de férias no sistema.</p>
+                <a href="https://pessoal.ajuda.betha.cloud/folha-cloud/novidades/2026/marco/#melhoria-entregue-em-24032026" target="_blank" rel="noopener noreferrer" class="btn-copy btn-link">
+                    Acessar Artigo ↗
+                </a>
+            </div>
+
+            <div class="card" data-category="links" style="display: none;">
+                <div class="card-badge badge-link">Artigo</div>
+                <h3>Cálculo de Férias Coletivas</h3>
+                <p>Orientações sobre os aprimoramentos aplicados na configuração e na rotina de cálculo de férias coletivas.</p>
+                <a href="https://pessoal.ajuda.betha.cloud/folha-cloud/novidades/2025/dezembro/?utm_medium=email&utm_campaign=ucb_novidades_da_versao_-_linha_pessoal_e_rh&utm_source=RD+Station#aprimorada-a-configura%C3%A7%C3%A3o-e-c%C3%A1lculo-de-f%C3%A9rias-coletivas" target="_blank" rel="noopener noreferrer" class="btn-copy btn-link">
+                    Acessar Artigo ↗
+                </a>
+            </div>
+
+            <div class="card" data-category="links" style="display: none;">
+                <div class="card-badge badge-link">Artigo</div>
+                <h3>Cálculo de IRRF com Redutor</h3>
+                <p>Artigo explicativo detalhando o ajuste na base e a aplicação do redutor simplificado no cálculo do Imposto de Renda Retido na Fonte (IRRF).</p>
+                <a href="https://pessoal.ajuda.betha.cloud/folha-cloud/novidades/2025/dezembro/#ajuste-no-c%C3%A1lculo-de-irrf" target="_blank" rel="noopener noreferrer" class="btn-copy btn-link">
+                    Acessar Artigo ↗
+                </a>
+            </div>
+
+            <div class="card" data-category="links" style="display: none;">
+                <div class="card-badge badge-link">Artigo</div>
+                <h3>Parcela Isenta e Moléstia Grave</h3>
+                <p>Mudanças na declaração de rendimentos referentes a parcela isenta e moléstia grave, focadas em aposentados e pensionistas.</p>
+                <a href="https://pessoal.ajuda.betha.cloud/folha-cloud/novidades/2025/outubro?_highlight=beneficioapos#mudan%C3%A7a-na-declara%C3%A7%C3%A3o-de-rendimentos-de-parcela-isenta-e-mol%C3%A9stia-grave---aposentados-e-pensionistas" target="_blank" rel="noopener noreferrer" class="btn-copy btn-link">
+                    Acessar Artigo ↗
+                </a>
+            </div>
+
+            <div class="card" data-category="links" style="display: none;">
+                <div class="card-badge badge-link">Artigo</div>
+                <h3>Comprovante no Minha Folha</h3>
+                <p>Informações sobre a integração da emissão do comprovante de rendimentos diretamente no portal do servidor (Minha Folha).</p>
+                <a href="https://pessoal.ajuda.betha.cloud/folha-cloud/novidades/2026/janeiro" target="_blank" rel="noopener noreferrer" class="btn-copy btn-link">
+                    Acessar Artigo ↗
+                </a>
+            </div>
+
+            <div class="card" data-category="links" style="display: none;">
+                <div class="card-badge badge-link">Artigo</div>
+                <h3>Documentação de APIs do Folha</h3>
+                <p>Acesso ao Service Layer e endpoints para desenvolvimento de integrações com o sistema Folha de Pagamento.</p>
+                <a href="https://pessoal.ajuda.betha.cloud/folha-cloud/conteudos-tecnicos/servicelayer" target="_blank" rel="noopener noreferrer" class="btn-copy btn-link">
+                    Acessar Artigo ↗
+                </a>
+            </div>
+
+            <div class="card" data-category="links" style="display: none;">
+                <div class="card-badge badge-link">Artigo</div>
+                <h3>Fórmulas e Funções do Folha</h3>
+                <p>Guia completo e documentação técnica para criação, manutenção e validação de fórmulas e funções na Folha.</p>
+                <a href="https://pessoal.ajuda.betha.cloud/folha-cloud/ajuda/outrosconteudos/formulas-funcoes" target="_blank" rel="noopener noreferrer" class="btn-copy btn-link">
+                    Acessar Artigo ↗
+                </a>
+            </div>
+
+            <div class="card" data-category="links" style="display: none;">
+                <div class="card-badge badge-link">Artigo</div>
+                <h3>Documentação de APIs do RH</h3>
+                <p>Acesso ao Service Layer e especificações de endpoints para integrações com o sistema de Recursos Humanos.</p>
+                <a href="https://pessoal.ajuda.betha.cloud/rh/conteudos-tecnicos/servicelayer" target="_blank" rel="noopener noreferrer" class="btn-copy btn-link">
+                    Acessar Artigo ↗
+                </a>
+            </div>
+
+            <div class="card" data-category="links" style="display: none;">
+                <div class="card-badge badge-link">Artigo</div>
+                <h3>Documentação de APIs do Ponto</h3>
+                <p>Acesso ao Service Layer e endpoints para desenvolvimento de integrações com o sistema de Controle de Ponto.</p>
+                <a href="https://pessoal.ajuda.betha.cloud/ponto/conteudos-tecnicos/servicelayer" target="_blank" rel="noopener noreferrer" class="btn-copy btn-link">
+                    Acessar Artigo ↗
+                </a>
+            </div>
+
+            <div class="card" data-category="links" style="display: none;">
+                <div class="card-badge badge-link">Artigo</div>
+                <h3>Fórmulas e Ocorrências do Ponto</h3>
+                <p>Documentação técnica focada na parametrização e uso de fórmulas para ocorrências no sistema de Ponto.</p>
+                <a href="https://pessoal.ajuda.betha.cloud/ponto/ajuda/formulas-funcoes" target="_blank" rel="noopener noreferrer" class="btn-copy btn-link">
+                    Acessar Artigo ↗
+                </a>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Alterar Período de Licença Prêmio</h3>
+                <p>Altera informações relevantes de períodos de licença prêmio nos períodos aquisitivos.</p>
+                <div class="code-box" id="script-licenca-premio">ed982815-1b8c-45ec-8024-589b43b4ea88</div>
+                <button class="btn-copy" onclick="copiarTexto('script-licenca-premio', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Correção Parcelas Isentas +65 Anos</h3>
+                <p>Corrige os valores do evento de parcela isenta +65 anos em folha.</p>
+                <div class="code-box" id="script-isentas-65">33da2e08-c223-45e9-9663-20d0cf47cdfa</div>
+                <button class="btn-copy" onclick="copiarTexto('script-isentas-65', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Deleta Afastamentos</h3>
+                <p>Deleta afastamentos com base nos parâmetros informados.</p>
+                <div class="code-box" id="script-del-afastamentos">971bec1c-e560-433f-a133-1569420d19cf</div>
+                <button class="btn-copy" onclick="copiarTexto('script-del-afastamentos', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Deleta Período Adicional</h3>
+                <p>Deleta os períodos de adicionais de matrículas no RH.</p>
+                <div class="code-box" id="script-del-adicional">d318c081-98e9-4f20-814f-642690558c53</div>
+                <button class="btn-copy" onclick="copiarTexto('script-del-adicional', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Diárias de Matrículas com Vínculo</h3>
+                <p>Retorna .csv com as matrículas encontradas advindas de pagamentos de diárias no sistema Contábil.</p>
+                <div class="code-box" id="script-diarias-vinculo">4da3f657-f9e7-40ee-a200-94b6a664f361</div>
+                <button class="btn-copy" onclick="copiarTexto('script-diarias-vinculo', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Gerar Seleção Avançada por CPF</h3>
+                <p>Gera seleção avançada por meio de .csv contendo uma coluna com os CPFs desejados.</p>
+                <div class="code-box" id="script-sel-cpf">8848a89e-730e-49a1-8c7e-3a734724c785</div>
+                <button class="btn-copy" onclick="copiarTexto('script-sel-cpf', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Campos Adicionais (e-Sfinge)</h3>
+                <p>Atualiza os campos adicionais "e-Sfinge Funcionários" de históricos selecionados ou apenas o último vigente.</p>
+                <div class="code-box" id="script-esfinge">89671277-ea05-4bcd-b120-c937a73ea211</div>
+                <button class="btn-copy" onclick="copiarTexto('script-esfinge', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Importação de Ausências</h3>
+                <p>Importa ausências para matrículas a partir de arquivo .csv.</p>
+                <div class="code-box" id="script-imp-ausencias">c9dab733-6acd-4aab-9fa1-68f20421f283</div>
+                <button class="btn-copy" onclick="copiarTexto('script-imp-ausencias', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Importação de Diárias RH</h3>
+                <p>Importa as diárias por competência do sistema Contábil com os valores agrupados por CPF no cadastro de diárias do RH.</p>
+                <div class="code-box" id="script-imp-diarias-rh">5e980055-0bfd-4078-91c8-f44482cfd305</div>
+                <button class="btn-copy" onclick="copiarTexto('script-imp-diarias-rh', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Importação de Diárias em Folha</h3>
+                <p>Importa as diárias por competência do sistema Contábil agrupadas por CPF nas variáveis da folha mensal.</p>
+                <div class="code-box" id="script-imp-diarias-folha">84be3047-da64-40c4-b3c4-c62fbaf302ab</div>
+                <button class="btn-copy" onclick="copiarTexto('script-imp-diarias-folha', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Importação de Horas (CSV)</h3>
+                <p>Importa lançamento de variáveis para matrículas a partir de arquivo .csv.</p>
+                <div class="code-box" id="script-imp-horas">502bf29a-4fbc-4085-be18-1cb43d1cbfb3</div>
+                <button class="btn-copy" onclick="copiarTexto('script-imp-horas', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Inserir Averbação Licença Prêmio (Coletivo)</h3>
+                <p>Insere a informação de averbação de licença prêmio nos períodos aquisitivos em massa.</p>
+                <div class="code-box" id="script-averbacao-coletiva">90dbc4b3-8e6d-448b-b89e-afe450861575</div>
+                <button class="btn-copy" onclick="copiarTexto('script-averbacao-coletiva', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Inserir Averbação Licença Prêmio (Individual)</h3>
+                <p>Insere a informação de averbação de licença prêmio nos períodos aquisitivos individualmente.</p>
+                <div class="code-box" id="script-averbacao-indiv">fe0828bb-826a-483e-9357-54d3d9ad11d6</div>
+                <button class="btn-copy" onclick="copiarTexto('script-averbacao-indiv', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Classificação em Eventos Calculados</h3>
+                <p>Insere a informação de classificação do evento em eventos calculados em folha.</p>
+                <div class="code-box" id="script-class-eventos">aadd8c11-70b4-4829-add8-7bb7a4ac05b2</div>
+                <button class="btn-copy" onclick="copiarTexto('script-class-eventos', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Inserir Evento em Folha</h3>
+                <p>Insere evento (sem bases) em folha de pagamento alterando o valor líquido correspondente.</p>
+                <div class="code-box" id="script-insere-evento">bb7b22a9-b690-4fbe-831a-42ce9613b094</div>
+                <button class="btn-copy" onclick="copiarTexto('script-insere-evento', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Pré Validações eSocial</h3>
+                <p>Realiza pré validações para implantação do eSocial.</p>
+                <div class="code-box" id="script-pre-esocial">7c1905b7-55b4-4f6a-8077-a32ef380692b</div>
+                <button class="btn-copy" onclick="copiarTexto('script-pre-esocial', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Relação de Eventos em Composições de Base</h3>
+                <p>Retorna .csv com os eventos que compõem as bases selecionadas.</p>
+                <div class="code-box" id="script-eventos-bases">c2f720b3-f533-4cf9-99db-a8f1f4730304</div>
+                <button class="btn-copy" onclick="copiarTexto('script-eventos-bases', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Relação de Funcionários Dinâmica</h3>
+                <p>Retorna .csv com informações dinâmicas dos funcionários.</p>
+                <div class="code-box" id="script-rel-func-dinamica">3600e44c-b040-4fff-b37f-2dcf3d998600</div>
+                <button class="btn-copy" onclick="copiarTexto('script-rel-func-dinamica', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Relação de Funcionários por Admissão</h3>
+                <p>Retorna .csv com relação de funcionários por data de admissão.</p>
+                <div class="code-box" id="script-rel-func-admissao">fdb6de0b-129b-4b0b-851e-5cf7cf0168c5</div>
+                <button class="btn-copy" onclick="copiarTexto('script-rel-func-admissao', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Relação de Funcionários por Evento</h3>
+                <p>Retorna um .csv com informações de funcionários por evento calculado em folha.</p>
+                <div class="code-box" id="script-rel-func-evento">bc5cb11e-9d66-494b-9f2e-a3a7b1d61e94</div>
+                <button class="btn-copy" onclick="copiarTexto('script-rel-func-evento', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Relação de Tempo Líquido de Serviço</h3>
+                <p>Retorna .csv com a quantidade dos dias trabalhados menos a quantidade de afastamentos selecionados.</p>
+                <div class="code-box" id="script-rel-tempo-liq">0b1dee1c-4e7f-43b2-8cda-1d7982a6930a</div>
+                <button class="btn-copy" onclick="copiarTexto('script-rel-tempo-liq', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Relação de Total Bruto por Competência</h3>
+                <p>Retorna .csv com informações do total bruto por funcionário com base em parâmetros informados.</p>
+                <div class="code-box" id="script-rel-bruto-comp">85ebfa77-b331-4cdf-8169-9a7b0964cc42</div>
+                <button class="btn-copy" onclick="copiarTexto('script-rel-bruto-comp', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">Folha</div>
+                <h3>Folha de 13° Integral Adiantado</h3>
+                <p>Insere eventos informativos com base no total líquido ou total desconto da folha calculada no 13° integral adiantado.</p>
+                <div class="code-box" id="script-correcao-13-adiantado">d0ab4fca-a3b1-40cf-8d57-2b044fa4f79e</div>
+                <button class="btn-copy" onclick="copiarTexto('script-correcao-13-adiantado', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">eSocial</div>
+                <h3>Conf. Encargos INSS com 5001 eSocial</h3>
+                <p>Retorna .csv com a comparação das bases de cálculo e INSS do relatório 5001 com as bases e INSS calculados no sistema.</p>
+                <div class="code-box" id="script-conf-inss-5001">2aaa3da9-8173-4579-9a00-c588e0b8ed32</div>
+                <button class="btn-copy" onclick="copiarTexto('script-conf-inss-5001', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="scripts" style="display: none;">
+                <div class="card-badge badge-script">eSocial</div>
+                <h3>Conf. IRRF Regime Caixa c/ 5002 eSocial</h3>
+                <p>Retorna .csv com a comparação das bases de cálculo e IRRF do relatório 5002 com as bases e IRRF calculados no sistema.</p>
+                <div class="code-box" id="script-conf-irrf-5002">2aaa3da9-8173-4579-9a00-c588e0b8ed32</div>
+                <button class="btn-copy" onclick="copiarTexto('script-conf-irrf-5002', this)">Copiar Chave</button>
+            </div>
+
+            <div class="card" data-category="relatorios" style="display: none;">
+                <div class="card-badge badge-report">Folha</div>
+                <h3>Comprovante de Rendimentos Manual - eSocial</h3>
+                <p>Relatório paliativo para inserção de valores manualmente.</p>
+                
+                <div class="report-keys">
+                    <div class="key-group">
+                        <span class="key-label">Relatório:</span>
+                        <div class="code-box text-sm" id="rep-rend-manual">38ecd203-dac7-4ea9-bde7-90dce3989152</div>
+                        <button class="btn-copy btn-xs" onclick="copiarTexto('rep-rend-manual', this)">Copiar</button>
+                    </div>
+                    <div class="key-group">
+                        <span class="key-label">Fonte:</span>
+                        <div class="code-box text-sm" id="src-rend-manual">410a036f-9777-48a3-bc8b-5cb3ac077e20</div>
+                        <button class="btn-copy btn-xs" onclick="copiarTexto('src-rend-manual', this)">Copiar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="relatorios" style="display: none;">
+                <div class="card-badge badge-report">Folha</div>
+                <h3>Encargos de IRRF Regime Caixa</h3>
+                <p>Relatório personalizado de IRRF Regime Caixa para conferência de encargos.</p>
+                
+                <div class="report-keys">
+                    <div class="key-group">
+                        <span class="key-label">Relatório:</span>
+                        <div class="code-box text-sm" id="rep-irrf-caixa">89206ea2-6dae-4cde-9fcd-eb6fc8349fa2</div>
+                        <button class="btn-copy btn-xs" onclick="copiarTexto('rep-irrf-caixa', this)">Copiar</button>
+                    </div>
+                    <div class="key-group">
+                        <span class="key-label">Fonte:</span>
+                        <div class="code-box text-sm" id="src-irrf-caixa">410a036f-9777-48a3-bc8b-5cb3ac077e20</div>
+                        <button class="btn-copy btn-xs" onclick="copiarTexto('src-irrf-caixa', this)">Copiar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="relatorios" style="display: none;">
+                <div class="card-badge badge-report">Folha</div>
+                <h3>Tempo de Serviço Líquido</h3>
+                <p>Retorna os dias trabalhados, dias de afastamentos e dias líquidos conforme seleção de parâmetros.</p>
+                
+                <div class="report-keys">
+                    <div class="key-group">
+                        <span class="key-label">Relatório:</span>
+                        <div class="code-box text-sm" id="rep-tempo-liq">5f628dc3-93e8-4dba-b29f-02eabd68f47e</div>
+                        <button class="btn-copy btn-xs" onclick="copiarTexto('rep-tempo-liq', this)">Copiar</button>
+                    </div>
+                    <div class="key-group">
+                        <span class="key-label">Fonte:</span>
+                        <div class="code-box text-sm" id="src-tempo-liq">dd79bdbe-32e6-41b8-a658-d342646cf36c</div>
+                        <button class="btn-copy btn-xs" onclick="copiarTexto('src-tempo-liq', this)">Copiar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-category="relatorios" style="display: none;">
+                <div class="card-badge badge-report">eSocial</div>
+                <h3>IRRF por Trabalhador (Anual)</h3>
+                <p>Relatório com o agregado de bases e imposto de renda retido no ano-calendário selecionado.</p>
+                
+                <div class="report-keys">
+                    <div class="key-group">
+                        <span class="key-label">Relatório:</span>
+                        <div class="code-box text-sm" id="rep-irrf-anual">37f40e7e-bc50-47d5-abf4-c5f90eda47ee</div>
+                        <button class="btn-copy btn-xs" onclick="copiarTexto('rep-irrf-anual', this)">Copiar</button>
+                    </div>
+                    <div class="key-group">
+                        <span class="key-label">Fonte:</span>
+                        <div class="code-box text-sm" id="src-irrf-anual">b24ba670-f35c-4ae5-b0e4-3b70f11ae42b</div>
+                        <button class="btn-copy btn-xs" onclick="copiarTexto('src-irrf-anual', this)">Copiar</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <div class="chatbot-widget">
+        <button id="chatbot-toggle" class="chatbot-toggle" onclick="toggleChat()">
+            <span class="chat-icon">💬</span>
+        </button>
+
+        <div id="chatbot-window" class="chatbot-window">
+            <div class="chat-header">
+                <div class="chat-title">
+                    <span class="ai-icon">✨</span>
+                    <span>Assistente Wiki</span>
+                </div>
+                <button class="close-chat" onclick="toggleChat()">✖</button>
+            </div>
+            
+            <div id="chat-messages" class="chat-messages">
+                <div class="message bot-message">
+                    Olá! Sou o assistente da Wiki. O que você está procurando hoje? (Ex: senha, lentidão, férias)
+                </div>
+            </div>
+            
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Digite sua dúvida..." onkeypress="handleChatEnter(event)">
+                <button onclick="enviarMensagemChat()">Enviar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
