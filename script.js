@@ -1,7 +1,21 @@
 // ==========================================================================
 // VARIÁVEL GLOBAL
 // ==========================================================================
-let categoriaAtual = 'mensagens';
+// Busca a última aba salva no navegador. Se não tiver nenhuma, o padrão é 'mensagens'
+let categoriaAtual = localStorage.getItem('abaSelecionada') || 'mensagens'; 
+
+// Executa automaticamente ao carregar a página para abrir na aba certa após o F5
+document.addEventListener("DOMContentLoaded", () => {
+    // Procura o link do menu que corresponde à aba salva
+    const linkAtivo = Array.from(document.querySelectorAll('.nav-link')).find(link => 
+        link.getAttribute('onclick').includes(categoriaAtual)
+    );
+    
+    // Força o clique simulado para abrir a aba salva com toda a estilização correta
+    if (linkAtivo) {
+        filtrarCategoria(categoriaAtual, linkAtivo);
+    }
+});
 
 // ==========================================================================
 // LÓGICA DE COPIAR TEXTO
@@ -51,6 +65,8 @@ themeToggleBtn.addEventListener('click', () => {
 // ==========================================================================
 function filtrarCategoria(categoria, elementoClicado) {
     categoriaAtual = categoria;
+
+    localStorage.setItem('abaSelecionada', categoria);
     
     // Reseta a barra de pesquisa
     document.getElementById('search-input').value = '';
