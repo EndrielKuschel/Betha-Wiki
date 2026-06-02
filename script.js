@@ -356,3 +356,24 @@ function removerDigitando(id) {
         digitandoDiv.remove();
     }
 }
+
+// ==========================================================================
+// LÓGICA DO MENU MOBILE
+// ==========================================================================
+const mobileBtn = document.getElementById('mobile-menu-btn');
+const sidebar = document.querySelector('.sidebar');
+
+if (mobileBtn && sidebar) {
+    mobileBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+    });
+    
+    // Fecha o menu automaticamente quando clica em uma aba no celular
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                sidebar.classList.remove('open');
+            }
+        });
+    });
+}
