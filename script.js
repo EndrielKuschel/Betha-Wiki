@@ -84,7 +84,7 @@ function filtrarCategoria(categoria, elementoClicado) {
         pageTitle.innerText = "Mensagens Padrões";
         pageDesc.innerText = "Clique no botão para copiar o template com a formatação correta para o chamado.";
     } else if (categoria === 'templates') {
-        pageTitle.innerText = "Templates de Abertura";
+        pageTitle.innerText = "Templates Padrões";
         pageDesc.innerText = "Estruturas prontas para abertura de incidentes e envio para outras equipes.";
     } else if (categoria === 'links') {
         pageTitle.innerText = "Central de Ajuda";
@@ -214,58 +214,113 @@ function enviarMensagemChat() {
 }
 
 function processarRespostaBot(mensagem) {
-
     let msgLimpa = removerAcentos(mensagem.toLowerCase()).replace(/[?,.!]/g, '');
     let respostaBot = "";
 
-    // -Saudações e Contexto Conversacional
     if (msgLimpa.match(/\b(oi|ola|bom dia|boa tarde|boa noite|opa)\b/)) {
-        respostaBot = "Olá! Como posso ajudar a acelerar seu atendimento hoje? Me diga o que precisa procurar.";
+        respostaBot = "Olá! Como posso ajudar a acelerar seu atendimento hoje? Me diga o que precisa procurar (Ex: férias, lentidão, irrf).";
         adicionarBalaoChat(respostaBot, 'bot-message');
         return;
     }
 
     if (msgLimpa.match(/\b(beethoven|ia|inteligencia artificial)\b/)) {
-        respostaBot = "O Beethoven é o nosso Assistente Inteligente! Use o botão destacado no menu esquerdo para abrir o chat dele e gerar scripts do zero.";
+        respostaBot = "O Beethoven é o nosso Assistente Inteligente! Use o botão com brilho (✨) no menu lateral esquerdo para abrir o chat dele e gerar scripts do zero.";
         adicionarBalaoChat(respostaBot, 'bot-message');
         return;
     }
 
     if (msgLimpa.match(/\b(obrigado|vlw|valeu|top|show|obg)\b/)) {
-        respostaBot = "Por nada! Estou sempre por aqui se precisar. 🚀";
+        respostaBot = "Por nada! Estou sempre por aqui se precisar agilizar seu suporte. 🚀";
         adicionarBalaoChat(respostaBot, 'bot-message');
         return;
     }
 
-    // Extração de Palavras-Chave
-    // Lista de palavras que o bot vai ignorar para focar no que importa
-    const stopWords = ["o", "a", "os", "as", "um", "uma", "como", "qual", "quero", "saber", "sobre", "de", "do", "da", "em", "no", "na", "para", "por", "com", "me", "ajuda", "tem", "algum", "alguma", "fazer", "onde", "acho", "eu", "ver"];
-    
-    const arrayPalavras = msgLimpa.split(' ');
-    
-    // Filtra deixando apenas palavras úteis com mais de 2 letras
-    const palavrasChave = arrayPalavras.filter(palavra => !stopWords.includes(palavra) && palavra.length > 2);
-    
-    let termoBusca = palavrasChave.join(' ');
-    if (termoBusca === '') {
-        termoBusca = msgLimpa; // Se filtrou tudo, tenta usar o texto original
+    // Motor de intenções
+    const intencoes = [
+        {
+            padrao: /(encerrar|finalizar|concluir|fechar|sem resposta|nao responde|lgpd)/,
+            termoBusca: "encerramento", 
+            resposta: "Precisa finalizar um chamado? Separei as mensagens de encerramento padrão para você:"
+        },
+        {
+            padrao: /(lento|lentidao|travando|caiu|fora do ar|instabilidade|demorando)/,
+            termoBusca: "instabilidade", 
+            resposta: "O cliente está relatando problemas de performance? Veja as mensagens e templates sobre instabilidade/lentidão:"
+        },
+        {
+            padrao: /(ferias|coletivas|cancelamento de ferias|gozo)/,
+            termoBusca: "ferias",
+            resposta: "Encontrei estes artigos na Central de Ajuda sobre Férias:"
+        },
+        {
+            padrao: /(imposto de renda|irrf|comprovante|rendimento|dirf|molestia|redutor)/,
+            termoBusca: "irrf",
+            resposta: "Assuntos relacionados a Imposto de Renda e Rendimentos. Veja os relatórios e artigos que encontrei:"
+        },
+        {
+            padrao: /(13|decimo|decimo terceiro|adiantamento 13)/,
+            termoBusca: "13",
+            resposta: "Buscando sobre 13º salário? Aqui estão os scripts e artigos relacionados:"
+        },
+        {
+            padrao: /(licenca|premio|averbacao)/,
+            termoBusca: "premio",
+            resposta: "Aqui estão os scripts para tratamento de Licença Prêmio e Averbações:"
+        },
+        {
+            padrao: /(api|integracao|service layer|endpoint)/,
+            termoBusca: "api",
+            resposta: "Para desenvolvimento e integrações, consulte estas documentações de APIs:"
+        },
+        {
+            padrao: /(diaria|diarias|viagem)/,
+            termoBusca: "diaria",
+            resposta: "Precisa importar ou tratar diárias? Veja os scripts disponíveis:"
+        },
+        {
+            padrao: /(ausencia|afastamento|faltas)/,
+            termoBusca: "afastamento",
+            resposta: "Separei os scripts para exclusão ou importação de afastamentos/ausências:"
+        }
+    ];
+
+    let intencaoIdentificada = false;
+
+    // Tenta bater a frase do usuário com as regras de negócio
+    for (let intencao of intencoes) {
+        if (msgLimpa.match(intencao.padrao)) {
+            const searchBar = document.getElementById('search-input');
+            searchBar.value = intencao.termoBusca;
+
+            const qtdEncontrada = buscarCards(intencao.termoBusca);
+            
+            respostaBot = `${intencao.resposta} (Encontrei ${qtdEncontrada} resultados 👇)`;
+            adicionarBalaoChat(respostaBot, 'bot-message');
+            intencaoIdentificada = true;
+            break;
+        }
     }
 
-    // Joga o termo purificado na barra de pesquisa
-    const searchBar = document.getElementById('search-input');
-    searchBar.value = termoBusca; 
-    
-    const qtdEncontrada = buscarCards(termoBusca);
+    // Fallback
+    if (!intencaoIdentificada) {
+        // Remove stop words básicas apenas se não achou intenção
+        const stopWords = ["o", "a", "os", "as", "um", "uma", "como", "qual", "quero", "saber", "sobre", "de", "do", "da", "em", "no", "na", "para", "por", "com", "me", "ajuda", "tem", "algum", "alguma", "fazer", "onde", "acho", "eu", "ver"];
+        const palavrasChave = msgLimpa.split(' ').filter(p => !stopWords.includes(p) && p.length > 2);
+        let termoBusca = palavrasChave.join(' ') || msgLimpa;
 
-    if (qtdEncontrada > 0) {
-        respostaBot = `Pronto! Encontrei ${qtdEncontrada} resultado(s) sobre "${termoBusca}" em toda a Wiki. Os cards já estão separados na sua tela. 👇`;
-    } else {
-        respostaBot = `Poxa, não encontrei nada exato sobre "${termoBusca}". Tente usar palavras-chave mais diretas como "senha", "relatório", "dba" ou verifique se não há erros de digitação.`;
-        searchBar.value = '';
-        buscarCards(''); // Restaura a tela se não achou
+        const searchBar = document.getElementById('search-input');
+        searchBar.value = termoBusca; 
+        const qtdEncontrada = buscarCards(termoBusca);
+
+        if (qtdEncontrada > 0) {
+            respostaBot = `Pronto! Encontrei ${qtdEncontrada} resultado(s) sobre "${termoBusca}". Os cards já estão separados na sua tela. 👇`;
+        } else {
+            respostaBot = `Poxa, não encontrei nada exato sobre "${termoBusca}". Tente usar palavras como "férias", "IRRF", "api" ou "lentidão".`;
+            searchBar.value = '';
+            buscarCards(''); // Restaura a tela original
+        }
+        adicionarBalaoChat(respostaBot, 'bot-message');
     }
-
-    adicionarBalaoChat(respostaBot, 'bot-message');
 }
 
 // ==========================================================================
