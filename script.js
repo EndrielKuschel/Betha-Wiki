@@ -140,7 +140,7 @@ function buscarCards(termoForcado = null) {
             pageDesc.innerText = "Chaves de importação de scripts para correções de dados e rotinas.";
         } else if (categoriaAtual === 'relatorios') {
             pageTitle.innerText = "Relatórios";
-            pageDesc.innerText = "Chaves de importação de relatórios customizados e visões específicas.";
+            pageDesc.innerText = "Chaves de importação de relatórios customizados.";
         }
         
         // Devolve o destaque azul para o menu lateral correto
