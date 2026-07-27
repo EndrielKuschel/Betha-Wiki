@@ -13,10 +13,10 @@
     
     /* Cores de Borda e Sombra */
     --border-color: #e2e8f0;
-    --border-card-hover: rgba(15, 76, 129, 0.2);
-    --border-code: var(--border-color); 
+    --border-card-hover: #0f4c81;
+    --border-code: #e2e8f0; 
     --border-input: #cbd5e1;
-    --border-focus: rgba(0, 86, 179, 0.1);
+    --border-focus: #0f4c81;
     
     /* Cores de Texto */
     --text-primary: #1e293b;
@@ -58,9 +58,9 @@ body.dark-mode {
 
     --border-color: #374151;
     --border-card-hover: rgba(197, 160, 89, 0.4);
-    --border-code: var(--border-color);
+    --border-code: #374151;
     --border-input: #334155;
-    --border-focus: rgba(56, 189, 248, 0.2);
+    --border-focus: rgba(197, 160, 89, 0.4);
 
     --text-primary: #f9fafb;
     --text-secondary: #9ca3af;
@@ -206,7 +206,7 @@ body {
 /* ==========================================================================
    BEETHOVEN CARD
    ========================================================================== */
-   .beethoven-card {
+.beethoven-card {
     margin-top: 40px;
     background: linear-gradient(135deg, #0f4c81 0%, #062a4a 100%);
     padding: 24px;
@@ -357,17 +357,18 @@ body.dark-mode .beethoven-card {
     font-size: 15px;
     transition: var(--transition-smooth);
     outline: none;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
 }
 
 .search-bar::placeholder {
     color: var(--text-secondary);
 }
 
+.search-bar:hover,
 .search-bar:focus {
-    border-color: var(--brand-blue);
+    border: 1.5px solid var(--border-focus); /* CORRIGIDO: Mantendo a borda sólida e vibrante */
     background-color: var(--bg-sidebar);
-    box-shadow: 0 0 0 4px var(--border-focus);
+    box-shadow: none;
     transform: translateY(-1px);
 }
 
@@ -773,17 +774,18 @@ a.btn-copy.btn-link:active {
     outline: none;
     transition: var(--transition-smooth);
     width: 250px; 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03); 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
 }
 
 #input-nome-analista::placeholder {
     color: var(--text-secondary);
 }
 
+#input-nome-analista:hover,
 #input-nome-analista:focus {
-    border-color: var(--brand-blue); 
+    border: 1.5px solid var(--border-focus); /* CORRIGIDO: Mantendo a borda sólida e vibrante */
     background-color: var(--bg-sidebar);
-    box-shadow: 0 0 0 4px var(--border-focus);
+    box-shadow: none;
     transform: translateY(-1px);
 }
 
