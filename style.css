@@ -7,14 +7,14 @@
     --bg-sidebar: #ffffff;
     --bg-card: #ffffff;
     --bg-glass: rgba(255, 255, 255, 0.7);
-    --bg-code: #f0f7ff; /* Azul pastel bem tranquilo, estilo "nuvem" */
+    --bg-code: #f0f7ff; 
     --bg-input: #f8fafc;
     --bg-success: #10b981;
     
     /* Cores de Borda e Sombra */
     --border-color: #e2e8f0;
     --border-card-hover: rgba(15, 76, 129, 0.2);
-    --border-code: var(--border-color); /* Borda igual à da descrição */
+    --border-code: var(--border-color); 
     --border-input: #cbd5e1;
     --border-focus: rgba(0, 86, 179, 0.1);
     
@@ -22,7 +22,7 @@
     --text-primary: #1e293b;
     --text-secondary: #64748b;
     --text-inverse: #ffffff;
-    --text-code: #1e293b; /* Texto escuro para leitura confortável */
+    --text-code: #1e293b;
     --text-input: #334155;
     
     /* Cores da Marca */
@@ -53,18 +53,18 @@ body.dark-mode {
     --bg-sidebar: #111827;
     --bg-card: #1f2937;
     --bg-glass: rgba(31, 41, 55, 0.7);
-    --bg-code: #102135; /* Azul noturno profundo, lembra editor de código */
+    --bg-code: #102135;
     --bg-input: #1e293b;
 
     --border-color: #374151;
     --border-card-hover: rgba(197, 160, 89, 0.4);
-    --border-code: var(--border-color); /* Borda igual à da descrição */
+    --border-code: var(--border-color);
     --border-input: #334155;
     --border-focus: rgba(56, 189, 248, 0.2);
 
     --text-primary: #f9fafb;
     --text-secondary: #9ca3af;
-    --text-code: #e2e8f0; /* Texto claro para contraste */
+    --text-code: #e2e8f0;
     --text-input: #e2e8f0;
     
     --brand-blue: #38bdf8;
@@ -748,7 +748,7 @@ a.btn-copy.btn-link:active {
 /* ==========================================================================
    CONFIGURAÇÃO DO ANALISTA (ASSINATURA AUTOMÁTICA)
    ========================================================================== */
-.user-config-container {
+   .user-config-container {
     margin-top: 24px; 
     margin-bottom: 24px; 
     display: flex;
@@ -763,21 +763,28 @@ a.btn-copy.btn-link:active {
 }
 
 #input-nome-analista {
-    padding: 6px 12px;
-    border: 1px solid var(--border-input); 
-    border-radius: 6px;
+    padding: 10px 16px;
+    border: 1px solid var(--border-color); 
+    border-radius: 10px; 
     font-size: 14px;
-    color: var(--text-input);
-    background-color: var(--bg-input);
+    color: var(--text-primary);
+    background-color: var(--bg-glass);
+    backdrop-filter: blur(10px);
     outline: none;
-    transition: all 0.2s ease;
-    width: 220px; 
+    transition: var(--transition-smooth);
+    width: 250px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03); 
+}
+
+#input-nome-analista::placeholder {
+    color: var(--text-secondary);
 }
 
 #input-nome-analista:focus {
     border-color: var(--brand-blue); 
-    background-color: var(--bg-card);
-    box-shadow: 0 0 0 3px var(--border-focus);
+    background-color: var(--bg-sidebar);
+    box-shadow: 0 0 0 4px var(--border-focus);
+    transform: translateY(-1px);
 }
 
 /* ==========================================================================
