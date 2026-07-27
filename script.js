@@ -56,16 +56,31 @@ function copiarTexto(idElemento, botao) {
 }
 
 // ==========================================================================
-// LÓGICA DO TEMA (DARK MODE)
+// LÓGICA DO TEMA COM MEMÓRIA
 // ==========================================================================
-const themeToggleBtn = document.getElementById('theme-toggle');
-themeToggleBtn.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    
-    themeToggleBtn.classList.add('animated');
-    setTimeout(() => {
-        themeToggleBtn.classList.remove('animated');
-    }, 500); 
+document.addEventListener('DOMContentLoaded', () => {
+    const themeBtn = document.querySelector('.btn-theme');
+    const body = document.body;
+
+    if (localStorage.getItem('temaPreferido') === 'dark') {
+        body.classList.add('dark-mode');
+    }
+
+    if (themeBtn) {
+        themeBtn.addEventListener('click', () => {
+
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('temaPreferido', 'dark');
+            } else {
+                localStorage.setItem('temaPreferido', 'light');
+            }
+            
+            themeBtn.classList.add('animated');
+            setTimeout(() => themeBtn.classList.remove('animated'), 500);
+        });
+    }
 });
 
 // ==========================================================================
