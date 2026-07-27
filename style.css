@@ -730,6 +730,38 @@ a.btn-copy.btn-link:active {
 }
 
 /* ==========================================================================
+   CONFIGURAÇÃO DO ANALISTA (ASSINATURA AUTOMÁTICA)
+   ========================================================================== */
+   .user-config-container {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-config-container label {
+    font-weight: bold;
+    color: var(--brand-blue);
+}
+
+#input-nome-analista {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#input-nome-analista:focus {
+    border-color: var(--brand-blue);
+}
+
+body.dark-mode .user-config-container label {
+    color: var(--brand-gold);
+}
+
+/* ==========================================================================
    RESPONSIVIDADE (MOBILE)
    ========================================================================== */
 

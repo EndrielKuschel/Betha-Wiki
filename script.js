@@ -24,14 +24,22 @@ function copiarTexto(idElemento, botao) {
     const elemento = document.getElementById(idElemento);
     
     let texto = elemento.innerHTML;
-    // Transforma os <br> do HTML em quebras de linha reais para preservar o Markdown/Jira
     texto = texto.replace(/<br\s*[\/]?>/gi, "\n");
-    
-    // Limpa outras tags HTML residuais
+
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = texto;
-    const textoLimpo = tempDiv.textContent || tempDiv.innerText || "";
+    let textoLimpo = tempDiv.textContent || tempDiv.innerText || "";
+
+    const inputNome = document.getElementById('input-nome-analista');
+    let nomeAnalista = inputNome ? inputNome.value.trim() : '';
     
+    // Se o campo estiver vazio, mantém o padrão '[SEU NOME]'
+    if (nomeAnalista === '') {
+        nomeAnalista = '[SEU NOME]';
+    }
+
+    textoLimpo = textoLimpo.replace(/\[SEU NOME\]/g, nomeAnalista);
+
     navigator.clipboard.writeText(textoLimpo).then(() => {
         const textoOriginal = botao.innerText;
         
@@ -356,6 +364,24 @@ function removerDigitando(id) {
         digitandoDiv.remove();
     }
 }
+
+// ==========================================================================
+// MEMÓRIA DA ASSINATURA DO ANALISTA
+// ==========================================================================
+document.addEventListener('DOMContentLoaded', () => {
+    const inputNome = document.getElementById('input-nome-analista');
+    
+    if (inputNome) {
+        const nomeSalvo = localStorage.getItem('nomeAnalista');
+        if (nomeSalvo) {
+            inputNome.value = nomeSalvo;
+        }
+
+        inputNome.addEventListener('input', (e) => {
+            localStorage.setItem('nomeAnalista', e.target.value);
+        });
+    }
+});
 
 // ==========================================================================
 // LÓGICA DO MENU MOBILE
