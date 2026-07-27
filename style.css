@@ -6,19 +6,42 @@
     --bg-main: #f3f6f9;
     --bg-sidebar: #ffffff;
     --bg-card: #ffffff;
+    --bg-glass: rgba(255, 255, 255, 0.7);
+    --bg-code: #0f172a;
+    --bg-input: #f8fafc;
+    --bg-success: #10b981;
     
-    /* Cores de Borda */
+    /* Cores de Borda e Sombra */
     --border-color: #e2e8f0;
     --border-card-hover: rgba(15, 76, 129, 0.2);
+    --border-code: #020617;
+    --border-input: #cbd5e1;
+    --border-focus: rgba(0, 86, 179, 0.1);
     
     /* Cores de Texto */
     --text-primary: #1e293b;
     --text-secondary: #64748b;
+    --text-inverse: #ffffff;
+    --text-code: #e2e8f0;
+    --text-input: #334155;
     
     /* Cores da Marca */
     --brand-blue: #0f4c81; 
+    --brand-blue-hover: #0c3d66;
+    --brand-blue-dark: #062a4a;
     --brand-gold: #c5a059;
     --brand-gold-hover: #b08d47;
+    --brand-gold-light: #d4ae6a;
+
+    /* Cores de Badges (Categorias) */
+    --badge-msg-bg: rgba(15, 76, 129, 0.08);
+    --badge-tpl-bg: rgba(197, 160, 89, 0.1);
+    --badge-link-text: #8b5cf6;
+    --badge-link-bg: rgba(139, 92, 246, 0.1);
+    --badge-script-text: #10b981;
+    --badge-script-bg: rgba(16, 185, 129, 0.1);
+    --badge-report-text: #f59e0b;
+    --badge-report-bg: rgba(245, 158, 11, 0.1);
     
     /* Animações */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -29,11 +52,25 @@ body.dark-mode {
     --bg-main: #0b1120;
     --bg-sidebar: #111827;
     --bg-card: #1f2937;
+    --bg-glass: rgba(31, 41, 55, 0.7);
+    --bg-code: #020617;
+    --bg-input: #1e293b;
+
     --border-color: #374151;
     --border-card-hover: rgba(197, 160, 89, 0.4);
+    --border-code: #1e293b;
+    --border-input: #334155;
+    --border-focus: rgba(56, 189, 248, 0.2);
+
     --text-primary: #f9fafb;
     --text-secondary: #9ca3af;
+    --text-input: #e2e8f0;
+
     --brand-blue: #38bdf8;
+    --brand-blue-hover: #0284c7;
+    --brand-blue-dark: #0f172a;
+
+    --badge-msg-bg: rgba(56, 189, 248, 0.15);
 }
 
 /* ==========================================================================
@@ -168,7 +205,7 @@ body {
 /* ==========================================================================
    BEETHOVEN CARD
    ========================================================================== */
-.beethoven-card {
+   .beethoven-card {
     margin-top: 40px;
     background: linear-gradient(135deg, #0f4c81 0%, #062a4a 100%);
     padding: 24px;
@@ -179,6 +216,12 @@ body {
     overflow: hidden;
     transition: var(--transition-smooth);
     z-index: 1;
+}
+
+body.dark-mode .beethoven-card {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border: 1px solid rgba(197, 160, 89, 0.4);
+    box-shadow: none;
 }
 
 .beethoven-card::before {
@@ -210,7 +253,7 @@ body {
 
 .beethoven-card h3 {
     font-size: 18px;
-    color: #ffffff;
+    color: var(--text-inverse);
     margin-bottom: 8px;
     font-weight: 700;
 }
@@ -229,7 +272,7 @@ body {
     display: block;
     width: 100%;
     background-color: var(--brand-gold);
-    color: #ffffff !important;
+    color: var(--text-inverse) !important;
     text-decoration: none;
     padding: 12px;
     border-radius: 10px;
@@ -244,14 +287,9 @@ body {
 }
 
 .btn-beethoven:hover {
-    background-color: #d4ae6a;
+    background-color: var(--brand-gold-light);
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(197, 160, 89, 0.4);
-}
-
-body.dark-mode .beethoven-card {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    border: 1px solid rgba(197, 160, 89, 0.4);
 }
 
 /* Sidebar Footer */
@@ -312,17 +350,13 @@ body.dark-mode .beethoven-card {
     padding: 16px 24px;
     border-radius: 12px;
     border: 1px solid var(--border-color);
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: var(--bg-glass);
     backdrop-filter: blur(10px);
     color: var(--text-primary);
     font-size: 15px;
     transition: var(--transition-smooth);
     outline: none;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-}
-
-body.dark-mode .search-bar {
-    background-color: rgba(31, 41, 55, 0.7);
 }
 
 .search-bar::placeholder {
@@ -332,12 +366,8 @@ body.dark-mode .search-bar {
 .search-bar:focus {
     border-color: var(--brand-blue);
     background-color: var(--bg-sidebar);
-    box-shadow: 0 0 0 4px rgba(15, 76, 129, 0.1);
+    box-shadow: 0 0 0 4px var(--border-focus);
     transform: translateY(-1px);
-}
-
-body.dark-mode .search-bar:focus {
-    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2);
 }
 
 /* ==========================================================================
@@ -370,7 +400,7 @@ body.dark-mode .search-bar:focus {
 /* ==========================================================================
    BADGES DINÂMICOS
    ========================================================================== */
-   .card-badge {
+.card-badge {
     position: absolute;
     top: 26px;
     right: 26px;
@@ -382,37 +412,34 @@ body.dark-mode .search-bar:focus {
     border-radius: 6px;
 }
 
-/* Cor Padrão: Mensagens (Azul) */
+/* Cor Padrão: Mensagens */
 .card[data-category="mensagens"] .card-badge {
     color: var(--brand-blue);
-    background: rgba(15, 76, 129, 0.08);
-}
-body.dark-mode .card[data-category="mensagens"] .card-badge {
-    background: rgba(56, 189, 248, 0.15);
+    background: var(--badge-msg-bg);
 }
 
-/* Cor: Templates de Abertura (Dourado) */
+/* Cor: Templates de Abertura */
 .card[data-category="templates"] .card-badge {
     color: var(--brand-gold);
-    background: rgba(197, 160, 89, 0.1);
+    background: var(--badge-tpl-bg);
 }
 
-/* Cor: Central de Ajuda (Roxo) */
+/* Cor: Central de Ajuda */
 .card[data-category="links"] .card-badge {
-    color: #8b5cf6;
-    background: rgba(139, 92, 246, 0.1);
+    color: var(--badge-link-text);
+    background: var(--badge-link-bg);
 }
 
-/* Cor: Scripts Úteis (Verde) */
+/* Cor: Scripts Úteis */
 .card[data-category="scripts"] .card-badge {
-    color: #10b981;
-    background: rgba(16, 185, 129, 0.1);
+    color: var(--badge-script-text);
+    background: var(--badge-script-bg);
 }
 
-/* Cor: Relatórios Úteis (Laranja) */
+/* Cor: Relatórios Úteis */
 .card[data-category="relatorios"] .card-badge {
-    color: #f59e0b;
-    background: rgba(245, 158, 11, 0.1);
+    color: var(--badge-report-text);
+    background: var(--badge-report-bg);
 }
 
 .card h3 {
@@ -441,21 +468,16 @@ body.dark-mode .card[data-category="mensagens"] .card-badge {
    CAIXAS DE CÓDIGO (SCRIPTS E RELATÓRIOS)
    ========================================================================== */
 .code-box {
-    background-color: #0f172a;
-    color: #e2e8f0;
+    background-color: var(--bg-code);
+    color: var(--text-code);
     padding: 16px;
     border-radius: 10px;
     font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
     font-size: 13px;
     margin-bottom: 20px;
     word-break: break-all;
-    border: 1px solid #020617;
+    border: 1px solid var(--border-code);
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
-}
-
-body.dark-mode .code-box {
-    background-color: #020617;
-    border-color: #1e293b;
 }
 
 /* Agrupamento de chaves duplas (Relatórios) */
@@ -492,7 +514,7 @@ a.btn-copy.btn-link {
     text-align: center;
     text-decoration: none;
     background-color: var(--brand-blue);
-    color: #ffffff;
+    color: var(--text-inverse);
     border: none;
     padding: 12px 22px;
     border-radius: 10px;
@@ -506,15 +528,9 @@ a.btn-copy.btn-link {
 
 .btn-copy:hover, 
 a.btn-copy.btn-link:hover {
-    background-color: #0c3d66;
+    background-color: var(--brand-blue-hover);
     transform: translateY(-1px);
     box-shadow: 0 4px 10px rgba(15, 76, 129, 0.25);
-}
-
-body.dark-mode .btn-copy:hover, 
-body.dark-mode a.btn-copy.btn-link:hover {
-    background-color: #0284c7;
-    box-shadow: 0 4px 10px rgba(56, 189, 248, 0.25);
 }
 
 .btn-copy:active, 
@@ -529,7 +545,7 @@ a.btn-copy.btn-link:active {
 
 /* Estado de Sucesso ao Copiar */
 .btn-copy.copiado {
-    background-color: #10b981 !important;
+    background-color: var(--bg-success) !important;
     box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3) !important;
 }
 
@@ -551,7 +567,7 @@ a.btn-copy.btn-link:active {
     border-radius: 50%;
     background: linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-gold) 100%);
     border: none;
-    color: white;
+    color: var(--text-inverse);
     font-size: 24px;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(15, 76, 129, 0.2);
@@ -594,8 +610,8 @@ a.btn-copy.btn-link:active {
 
 /* Cabeçalho do Chat */
 .chat-header {
-    background: linear-gradient(135deg, var(--brand-blue) 0%, #062a4a 100%);
-    color: white;
+    background: linear-gradient(135deg, var(--brand-blue) 0%, var(--brand-blue-dark) 100%);
+    color: var(--text-inverse);
     padding: 16px;
     display: flex;
     justify-content: space-between;
@@ -613,7 +629,7 @@ a.btn-copy.btn-link:active {
 .close-chat {
     background: transparent;
     border: none;
-    color: white;
+    color: var(--text-inverse);
     cursor: pointer;
     font-size: 14px;
     opacity: 0.8;
@@ -653,7 +669,7 @@ a.btn-copy.btn-link:active {
 
 .user-message {
     background-color: var(--brand-blue);
-    color: white;
+    color: var(--text-inverse);
     align-self: flex-end;
     border-bottom-right-radius: 4px;
 }
@@ -684,7 +700,7 @@ a.btn-copy.btn-link:active {
 
 .chat-input-area button {
     background-color: var(--brand-gold);
-    color: white;
+    color: var(--text-inverse);
     border: none;
     padding: 0 16px;
     border-radius: 8px;
@@ -732,40 +748,41 @@ a.btn-copy.btn-link:active {
 /* ==========================================================================
    CONFIGURAÇÃO DO ANALISTA (ASSINATURA AUTOMÁTICA)
    ========================================================================== */
-   .user-config-container {
-    margin-bottom: 20px;
+.user-config-container {
+    margin-top: 24px; 
+    margin-bottom: 24px; 
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 .user-config-container label {
     font-weight: bold;
+    font-size: 14px; 
     color: var(--brand-blue);
 }
 
 #input-nome-analista {
-    padding: 8px 12px;
-    border: 1px solid #ccc;
+    padding: 6px 12px;
+    border: 1px solid var(--border-input); 
     border-radius: 6px;
     font-size: 14px;
+    color: var(--text-input);
+    background-color: var(--bg-input);
     outline: none;
-    transition: border-color 0.3s;
+    transition: all 0.2s ease;
+    width: 220px; 
 }
 
 #input-nome-analista:focus {
-    border-color: var(--brand-blue);
-}
-
-body.dark-mode .user-config-container label {
-    color: var(--brand-gold);
+    border-color: var(--brand-blue); 
+    background-color: var(--bg-card);
+    box-shadow: 0 0 0 3px var(--border-focus);
 }
 
 /* ==========================================================================
    RESPONSIVIDADE (MOBILE)
    ========================================================================== */
-
-/* Esconde o botão de menu no Desktop */
 .mobile-menu-btn {
     display: none;
 }
@@ -774,7 +791,7 @@ body.dark-mode .user-config-container label {
     .mobile-menu-btn {
         display: inline-block;
         background: var(--brand-blue);
-        color: white;
+        color: var(--text-inverse);
         border: none;
         padding: 8px 16px;
         border-radius: 6px;
@@ -784,18 +801,13 @@ body.dark-mode .user-config-container label {
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
 
-    body.dark-mode .mobile-menu-btn {
-        background: var(--brand-gold);
-        color: #1a1a2e;
-    }
-
     /* Esconde a barra lateral para fora da tela */
     .sidebar {
         position: fixed;
         left: -100%;
         top: 0;
         height: 100vh;
-        z-index: 9999; /* Fica acima de tudo */
+        z-index: 9999; 
         transition: left 0.3s ease;
         box-shadow: 4px 0 15px rgba(0,0,0,0.5);
     }
