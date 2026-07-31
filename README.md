@@ -41,4 +41,4 @@ Como a Betha Wiki é uma aplicação puramente *Client-Side* (roda diretamente n
 ### Opção 1: Uso Local
 1. Faça o clone deste repositório:
    ```bash
-   git clone https://github.com/SeuUsuario/betha-wiki.git
+   git clone https://github.com/EndrielKuschel/betha-wiki.git
