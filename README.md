@@ -36,9 +36,4 @@ O código foi projetado visando facilidade de manutenção e um *Design System* 
 
 ## 🚀 Como Utilizar
 
-Como a Betha Wiki é uma aplicação puramente *Client-Side* (roda diretamente no navegador), não é necessária a instalação de bibliotecas, dependências como *Node.js* ou servidores locais, basta acessar: [Betha Wiki](https://github.com/EndrielKuschel/Betha-Wiki)
-
-### Opção 1: Uso Local
-1. Faça o clone deste repositório:
-   ```bash
-   git clone https://github.com/EndrielKuschel/betha-wiki.git
+Como a Betha Wiki é uma aplicação puramente *Client-Side* (roda diretamente no navegador), não é necessária a instalação de bibliotecas, dependências como *Node.js* ou servidores locais, basta acessar: [Betha Wiki](https://endrielkuschel.github.io/Betha-Wiki/)
